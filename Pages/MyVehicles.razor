@@ -1,0 +1,44 @@
+﻿@page "/myvehicles"
+@using CarM8_01.Data
+@inject VehiclesService vs
+
+
+@if (vehicles == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Color</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in vehicles)
+            {
+                <tr>
+                    <td>@vehicle.Year</td>
+                    <td>@vehicle.Make</td>
+                    <td>@vehicle.Model</td>
+                    <td>@vehicle.Color</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IQueryable<Vehicles> vehicles;
+
+
+    protected override void OnInitialized()
+    {
+       vehicles = vs.GetVehicles();
+    }
+
+}

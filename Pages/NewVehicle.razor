@@ -1,0 +1,103 @@
+﻿@using CarM8_01.Data
+@using CarM8_01.Data.Models
+@using System
+@using Syncfusion.Blazor.Notifications.Internal
+@inherits OwningComponentBase<VehiclesService>
+
+<h3>New Vehicle</h3>
+
+<SfToast ID="toast_default" 
+@ref="ToastObj" 
+Title="Help Desk Ticket" 
+Content="@ToastContent" TimeOut="5000"> 
+<ToastPosition X="Right"></ToastPosition> 
+</SfToast>
+
+<EditForm Model="@globVehicle" OnValidSubmit="@HandleValidSubmit"> 
+    <DataAnnotationsValidator /> 
+    <ValidationSummary /> 
+
+<p> 
+    <label for="Year">Year : </label> 
+    <InputTextArea id="year" @bind-Value="globVehicle.Year" /> 
+</p> 
+<p> 
+    <label for="Make">Make : </label> 
+    <InputTextArea id="make" @bind-Value="globVehicle.Make" /> 
+</p> 
+<p> 
+    <label for="Model">Model : </label> 
+    <InputTextArea id="model" @bind-Value="globVehicle.Model" /> 
+</p> 
+<p> 
+    <label for="VehicleType">Vehicle Type: </label> 
+    <InputSelect id="vehicletype" @bind-Value="globVehicle.VehicleType"> 
+        <option value="">Select type ...</option> 
+        <option value="Convertible">Convertible</option> 
+        <option value="Coupe">Coupe</option> 
+        <option value="Hatchback">Hatchback</option> 
+        <option value="Minivan/Van">Minivan/Van</option> 
+        <option value="Sedan">Sedan</option> 
+        <option value="Station Wagon">Station Wagon</option> 
+        <option value="SUV">SUV</option> 
+        <option value="Truck">Truck</option> 
+    </InputSelect> 
+        <ValidationMessage For="() => globVehicle.VehicleType" /> 
+</p> 
+<p>
+    <label for="Color"> Color: </label>
+    <InputTextArea id="color" @bind-Value="globVehicle.Color" /> 
+</p>
+<p>
+    <label for="Engine"> Engine: </label>
+    <InputTextArea id="engine" @bind-Value="globVehicle.Engine" /> 
+</p>
+<p>
+    <label for="Mileage"> Mileage: </label>
+    <InputTextArea id="mileage" @bind-Value="globVehicle.Mileage.ToString()"/> 
+</p>
+<p>
+    <label for="FuelCapacity"> Fuel Capacity: </label>
+    <InputTextArea id="fuelcapacity" @bind-Value="globVehicle.FuelCapacity" /> 
+</p>
+
+<div class="e-footer-content"> 
+    <div class="button-container">
+        <button type="submit" class="e-btn e-normal e-primary">Save</button> 
+    </div> 
+</div>
+</EditForm>
+
+
+@code {
+    SfToast ToastObj;
+    private string ToastContent {get; set;} = "";
+
+    Vehicle globVehicle = new Vehicle(); 
+
+    public async Task HandleValidSubmit(EditContext context) 
+    { 
+            //Assigning vehicleID a random number
+            Vehicles newVehicles = new Vehicles();
+            Random r = new Random();
+            int iD = r.Next(10);
+            //Assigning the velaues stated in the form to the values of a new object
+            newVehicles.VehicleId = iD;
+            newVehicles.Year = globVehicle.Year;
+            newVehicles.Make = globVehicle.Make;
+            newVehicles.Model = globVehicle.Model;
+            newVehicles.VehicleType = globVehicle.VehicleType;
+            newVehicles.Color = globVehicle.Color;
+            newVehicles.Engine = globVehicle.Engine;
+            newVehicles.Mileage = globVehicle.Mileage;
+            newVehicles.FuelCapacity = globVehicle.FuelCapacity;
+            //Saving the new vehicle
+            var resurl = @Service.CreateVehicleAsync(newVehicles);
+            //Clearing the form.
+            globVehicle = new Vehicle();
+
+            ToastContent = "Saved!";
+            await Task.Delay(100);
+            await this.ToastObj.Show();
+    }
+}
