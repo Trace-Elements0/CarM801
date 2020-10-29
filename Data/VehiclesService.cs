@@ -46,7 +46,7 @@ namespace CarM8_01.Data
             catch (Exception ex)
             {
                 DetachAllEntities(); 
-                throw;
+                throw ex;
             }
         }
 

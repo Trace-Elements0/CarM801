@@ -1,17 +1,17 @@
-﻿@using CarM8_01.Data
+﻿@page "/newvehicle"
+@using CarM8_01.Data
 @using CarM8_01.Data.Models
-@using System
 @using Syncfusion.Blazor.Notifications.Internal
 @inherits OwningComponentBase<VehiclesService>
 
 <h3>New Vehicle</h3>
 
-<SfToast ID="toast_default" 
+@*<SfToast ID="toast_default" 
 @ref="ToastObj" 
 Title="Help Desk Ticket" 
 Content="@ToastContent" TimeOut="5000"> 
 <ToastPosition X="Right"></ToastPosition> 
-</SfToast>
+</SfToast>*@
 
 <EditForm Model="@globVehicle" OnValidSubmit="@HandleValidSubmit"> 
     <DataAnnotationsValidator /> 
@@ -54,7 +54,7 @@ Content="@ToastContent" TimeOut="5000">
 </p>
 <p>
     <label for="Mileage"> Mileage: </label>
-    <InputTextArea id="mileage" @bind-Value="globVehicle.Mileage.ToString()"/> 
+    <InputTextArea id="mileage" @bind-="globVehicle.Mileage"/> 
 </p>
 <p>
     <label for="FuelCapacity"> Fuel Capacity: </label>
@@ -69,7 +69,8 @@ Content="@ToastContent" TimeOut="5000">
 </EditForm>
 
 
-@code {
+@code 
+{
     SfToast ToastObj;
     private string ToastContent {get; set;} = "";
 
@@ -89,7 +90,7 @@ Content="@ToastContent" TimeOut="5000">
             newVehicles.VehicleType = globVehicle.VehicleType;
             newVehicles.Color = globVehicle.Color;
             newVehicles.Engine = globVehicle.Engine;
-            newVehicles.Mileage = globVehicle.Mileage;
+            newVehicles.Mileage = Convert.ToInt32(globVehicle.Mileage);
             newVehicles.FuelCapacity = globVehicle.FuelCapacity;
             //Saving the new vehicle
             var resurl = @Service.CreateVehicleAsync(newVehicles);
