@@ -41,8 +41,8 @@ namespace CarM8_01
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddDbContext<Carm8dataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<VehiclesService>();
             services.AddSyncfusionBlazor();
+            services.AddScoped<VehiclesService>();
 
         }
 

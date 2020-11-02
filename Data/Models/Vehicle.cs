@@ -8,7 +8,7 @@ namespace CarM8_01.Data.Models
 {
     public class Vehicle
     {
-        public int VehicleId { get; set; }
+        public string VehicleId { get; set; }
         [Required]
         public string Year { get; set; }
         [Required]
@@ -22,7 +22,7 @@ namespace CarM8_01.Data.Models
         [Required]
         public string Engine { get; set; }
         [Required]
-        public int Mileage { get; set; }
+        public string Mileage { get; set; }
         [Required]
         public string FuelCapacity { get; set; }
     }

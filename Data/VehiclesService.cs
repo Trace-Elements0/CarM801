@@ -23,7 +23,7 @@ namespace CarM8_01.Data
             return _context.Vehicles.AsNoTracking();
         }
 
-        public async Task<Vehicles> GetVehiclesAsync(int VehicleID)
+        public async Task<Vehicles> GetVehiclesAsync(string VehicleID)
         { // Get the existing vehicle
           var ExistingVehicle = await _context.Vehicles
               .Where(x => x.VehicleId == VehicleID) 

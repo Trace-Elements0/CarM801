@@ -6,14 +6,14 @@ namespace CarM8_01.Data
 {
     public partial class Vehicles
     {
-        public int VehicleId { get; set; }
+        public string VehicleId { get; set; }
         public string Year { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
         public string VehicleType { get; set; }
         public string Color { get; set; }
         public string Engine { get; set; }
-        public int Mileage { get; set; }
+        public string Mileage { get; set; }
         public string FuelCapacity { get; set; }
     }
 }
