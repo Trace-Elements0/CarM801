@@ -5,25 +5,22 @@
 
 <h3>New Vehicle</h3>
 <br/>
-<container>
+<div class="newvehiclesform">
     <EditForm Model="@globVehicle" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 	    <div class="form-group ">
 		    <label>Year</label>
-			    <label for "year"></label>
 			    <InputText id="year" @bind-Value="globVehicle.Year"/>
 			    <ValidationMessage For="() => globVehicle.Year"/>
 	    </div>
 	    <div class="form-group ">
 		    <label>Make</label>
-			    <label for "make"></label>
 			    <InputText id="make" @bind-Value="globVehicle.Make"/>
 			    <ValidationMessage For="() => globVehicle.Make"/>
 	    </div>
 	    <div class="form-group ">
 		    <label>Model</label>
-			    <label for "model"> Model: </label>
 			    <InputText id="model" @bind-Value="globVehicle.Model" />
 			    <ValidationMessage For="() => globVehicle.Model"/>
 	    </div>
@@ -44,31 +41,27 @@
 	    </div>
 	    <div class="form-group ">
 		    <label>Color</label>
-		    <label for "color"></label>
 		    <InputText id="color" @bind-Value="globVehicle.Color" />
 		    <ValidationMessage For="() => globVehicle.Color"/>
 	    </div>
         <div class="form-group ">
 		    <label>Engine</label>
-		    <label for "engine"></label>
 		    <InputText id="engine" @bind-Value="globVehicle.Engine" />
 		    <ValidationMessage For="() => globVehicle.Engine"/>
 	    </div>
 	    <div class="form-group ">
 		    <label>Mileage</label>
-		    <label for "mileage"></label>
 		    <InputText id="mileage" @bind-Value="globVehicle.Mileage" />
 		    <ValidationMessage For="() => globVehicle.Mileage"/>
 	    </div>
 	    <div class="form-group ">
 		    <label>Fuel Capacity</label>
-		    <label for "fuelcapacity"></label>
 		    <InputText id="fuelcapacity" @bind-Value="globVehicle.FuelCapacity" />
 		    <ValidationMessage For="() => globVehicle.FuelCapacity"/>
 	    </div>
 	    <button type="submit" class="e-btn e-normal e-primary">Add New Vehicle</button>
     </EditForm>
-</container>
+</div>
 
 
 @code{

@@ -184,3 +184,15 @@ app {
         display: block;
     }
 }
+
+.newvehiclesform {
+    background-color: rgba(255, 255, 255, .20);
+    padding: 2.5%;
+    max-width: 33%;
+}
+
+label {
+    border: solid 1px #ffffff;
+    width: 25%;
+
+}
