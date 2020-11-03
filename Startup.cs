@@ -1,20 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CarM8_01.Areas.Identity;
+using CarM8_01.Data;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CarM8_01.Areas.Identity;
-using CarM8_01.Data;
 using Syncfusion.Blazor;
 
 namespace CarM8_01
@@ -35,7 +28,7 @@ namespace CarM8_01
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>() // Enable roles 
+            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>() // Enable roles
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -43,7 +36,6 @@ namespace CarM8_01
             services.AddDbContext<Carm8dataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddSyncfusionBlazor();
             services.AddScoped<VehiclesService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
