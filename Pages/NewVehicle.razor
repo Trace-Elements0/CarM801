@@ -5,100 +5,95 @@
 
 <h3>New Vehicle</h3>
 <br/>
+<container>
+    <EditForm Model="@globVehicle" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+	    <div class="form-group ">
+		    <label>Year</label>
+			    <label for "year"></label>
+			    <InputText id="year" @bind-Value="globVehicle.Year"/>
+			    <ValidationMessage For="() => globVehicle.Year"/>
+	    </div>
+	    <div class="form-group ">
+		    <label>Make</label>
+			    <label for "make"></label>
+			    <InputText id="make" @bind-Value="globVehicle.Make"/>
+			    <ValidationMessage For="() => globVehicle.Make"/>
+	    </div>
+	    <div class="form-group ">
+		    <label>Model</label>
+			    <label for "model"> Model: </label>
+			    <InputText id="model" @bind-Value="globVehicle.Model" />
+			    <ValidationMessage For="() => globVehicle.Model"/>
+	    </div>
+	    <div class="form-group ">
+		    <label for="type">Vehicle Type</label>
+			    <InputSelect id="type" @bind-Value="globVehicle.VehicleType">
+				    <option value="">Select type ...</option>
+				    <option value="Convertible">Convertible</option>
+				    <option value="Coupe">Coupe</option>
+				    <option value="Hatchback">Hatchback</option>
+				    <option value="Minivan/Van">Minivan/Van</option>
+				    <option value="Sedan">Sedan</option>
+				    <option value="Station Wagon">Station Wagon</option>
+				    <option value="SUV">SUV</option>
+				    <option value="Truck">Truck</option>
+			    </InputSelect>
+			    <ValidationMessage For="() => globVehicle.VehicleType"/>
+	    </div>
+	    <div class="form-group ">
+		    <label>Color</label>
+		    <label for "color"></label>
+		    <InputText id="color" @bind-Value="globVehicle.Color" />
+		    <ValidationMessage For="() => globVehicle.Color"/>
+	    </div>
+        <div class="form-group ">
+		    <label>Engine</label>
+		    <label for "engine"></label>
+		    <InputText id="engine" @bind-Value="globVehicle.Engine" />
+		    <ValidationMessage For="() => globVehicle.Engine"/>
+	    </div>
+	    <div class="form-group ">
+		    <label>Mileage</label>
+		    <label for "mileage"></label>
+		    <InputText id="mileage" @bind-Value="globVehicle.Mileage" />
+		    <ValidationMessage For="() => globVehicle.Mileage"/>
+	    </div>
+	    <div class="form-group ">
+		    <label>Fuel Capacity</label>
+		    <label for "fuelcapacity"></label>
+		    <InputText id="fuelcapacity" @bind-Value="globVehicle.FuelCapacity" />
+		    <ValidationMessage For="() => globVehicle.FuelCapacity"/>
+	    </div>
+	    <button type="submit" class="e-btn e-normal e-primary">Add New Vehicle</button>
+    </EditForm>
+</container>
 
-@*<SfToast ID="toast_default" 
-@ref="ToastObj" 
-Title="Help Desk Ticket" 
-Content="@ToastContent" TimeOut="5000"> 
-<ToastPosition X="Right"></ToastPosition> 
-</SfToast>
-*@
-<EditForm Model="@globVehicle" OnValidSubmit="@HandleValidSubmit"> 
-    <DataAnnotationsValidator></DataAnnotationsValidator>
-    <ValidationSummary /> 
 
-<div> 
-    <label for="Year">Year : </label> 
-    <InputTextArea id="year" @bind-Value="globVehicle.Year" /> 
-</div> 
-<div> 
-    <label for="Make">Make : </label> 
-    <InputTextArea id="make" @bind-Value="globVehicle.Make" /> 
-</div> 
-<div> 
-    <label for="Model">Model : </label> 
-    <InputTextArea id="model" @bind-Value="globVehicle.Model" /> 
-</div> 
-<div> 
-    <label for="VehicleType">Vehicle Type: </label> 
-    <InputSelect id="vehicletype" @bind-Value="globVehicle.VehicleType"> 
-        <option value="">Select type ...</option> 
-        <option value="Convertible">Convertible</option> 
-        <option value="Coupe">Coupe</option> 
-        <option value="Hatchback">Hatchback</option> 
-        <option value="Minivan/Van">Minivan/Van</option> 
-        <option value="Sedan">Sedan</option> 
-        <option value="Station Wagon">Station Wagon</option> 
-        <option value="SUV">SUV</option> 
-        <option value="Truck">Truck</option> 
-    </InputSelect> 
-        <ValidationMessage For="() => globVehicle.VehicleType" /> 
-</div> 
-<div>
-    <label for="Color"> Color: </label>
-    <InputTextArea id="color" @bind-Value="globVehicle.Color" /> 
-</div>
-<div>
-    <label for="Engine"> Engine: </label>
-    <InputTextArea id="engine" @bind-Value="globVehicle.Engine" /> 
-</div>
-<div>
-    <label for="Mileage"> Mileage: </label>
-    <InputTextArea id="mileage" @bind-Value="globVehicle.Mileage"/> 
-</div>
-<div>
-    <label for="FuelCapacity"> Fuel Capacity: </label>
-    <InputTextArea id="fuelcapacity" @bind-Value="globVehicle.FuelCapacity" /> 
-</div>
+@code{
+	private Vehicle globVehicle = new Vehicle();
 
-<div class="e-footer-content"> 
-    <div class="button-container">
-        <button type="submit" class="e-btn e-normal e-primary">Save</button> 
-    </div> 
-</div>
-</EditForm>
+	public async Task HandleValidSubmit(EditContext context)
+	{
+			//Assigning vehicleID a random number
+			Vehicles newVehicles = new Vehicles();
+			Random r = new Random();
+			int iD = r.Next(10);
+			//Assigning the velaues stated in the form to the values of a new object
+			newVehicles.VehicleId = iD;
+			newVehicles.Year = globVehicle.Year;
+			newVehicles.Make = globVehicle.Make;
+			newVehicles.Model = globVehicle.Model;
+			newVehicles.VehicleType = globVehicle.VehicleType;
+			newVehicles.Color = globVehicle.Color;
+			newVehicles.Engine = globVehicle.Engine;
+			newVehicles.Mileage = globVehicle.Mileage;
+			newVehicles.FuelCapacity = globVehicle.FuelCapacity;
+			//Saving the new vehicle
+			var result = @Service.CreateVehicleAsync(newVehicles);
+			//Clearing the form
+			globVehicle = new Vehicle();
 
-
-@code 
-{
-    /*SfToast ToastObj;
-    private string ToastContent {get; set;} = "";*/
-
-    Vehicle globVehicle = new Vehicle(); 
-
-    public async Task HandleValidSubmit(EditContext context) 
-    { 
-            //Assigning vehicleID a random number
-            Vehicles newVehicles = new Vehicles();
-            Random r = new Random();
-            string iD = r.Next(10).ToString();
-            //Assigning the velaues stated in the form to the values of a new object
-            newVehicles.VehicleId = iD;
-            newVehicles.Year = globVehicle.Year;
-            newVehicles.Make = globVehicle.Make;
-            newVehicles.Model = globVehicle.Model;
-            newVehicles.VehicleType = globVehicle.VehicleType;
-            newVehicles.Color = globVehicle.Color;
-            newVehicles.Engine = globVehicle.Engine;
-            newVehicles.Mileage = globVehicle.Mileage;
-            newVehicles.FuelCapacity = globVehicle.FuelCapacity;
-            //Saving the new vehicle
-            var result = @Service.CreateVehicleAsync(newVehicles);
-            //Clearing the form.
-            globVehicle = new Vehicle();
-
-            /*ToastContent = "Saved!";
-            await Task.Delay(100);
-            await this.ToastObj.Show();*/
-    }
+	}
 }

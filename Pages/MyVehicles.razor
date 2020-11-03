@@ -1,9 +1,39 @@
 ﻿@page "/myvehicles"
 @using CarM8_01.Data
-@inject VehiclesService vs
+@using Syncfusion.Blazor.Grids
+@inherits OwningComponentBase<VehiclesService>
+
+<h3>My Vehicles</h3>
+<br/>
+ <div>
+    <div id="target" style="height: 500px;">
+        <SfGrid ID="Grid"
+                DataSource="@vehicles">
+    <GridPageSettings PageSize="5"></GridPageSettings>
+        <GridColumns>
+            <GridColumn Field=@nameof(Vehicles.Year) HeaderText="Year" TextAlign="@TextAlign.Left" Width="70">
+            </GridColumn>
+            <GridColumn Field=@nameof(Vehicles.Make) HeaderText="Make" TextAlign="@TextAlign.Left" Width="80">
+            </GridColumn>
+            <GridColumn Field=@nameof(Vehicles.Model) HeaderText="Model" TextAlign="@TextAlign.Left" Width="80">
+            </GridColumn>
+            <GridColumn Field=@nameof(Vehicles.Color) HeaderText="Color" TextAlign="@TextAlign.Left" Width="150">
+            </GridColumn>
+        </GridColumns>
+    </SfGrid>
+    </div>
+</div>
 
 
-@if (vehicles == null)
+@code {
+    public IQueryable<Vehicles> vehicles {get; set; }
+
+    protected override void OnInitialized()
+    {
+       vehicles = @Service.GetVehicles();
+    }
+}
+@*@if (vehicles == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -11,34 +41,30 @@ else
 {
     <table class="table">
         <thead>
-            <tr>
-                <th>Year</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Color</th>
-            </tr>
+        <tr>
+            <th>Year</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Color</th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var vehicle in vehicles)
-            {
-                <tr>
-                    <td>@vehicle.Year</td>
-                    <td>@vehicle.Make</td>
-                    <td>@vehicle.Model</td>
-                    <td>@vehicle.Color</td>
-                </tr>
-            }
+        @foreach (var v in vehicles)
+        {
+            <tr>
+                <td>@v.Year</td>
+                <td>@v.Make</td>
+                <td>@v.Model</td>
+                <td>@v.Color</td>
+            </tr>
+        }
         </tbody>
     </table>
-}
+}*@
 
-@code {
-    private IQueryable<Vehicles> vehicles;
-
-
-    protected override void OnInitialized()
-    {
-       vehicles = vs.GetVehicles();
-    }
-
-}
+@*                 <GridColumn HeaderText="" TextAlign="TextAlign.Left" Width="150">
+                    <GridCommandColumns>
+                        <GridCommandColumn Type=CommandButtonType.Delete ButtonOption="@(new CommandButtonOptions() {Content = "Delete"})">
+                        </GridCommandColumn>
+                    </GridCommandColumns>
+                </GridColumn> *@
