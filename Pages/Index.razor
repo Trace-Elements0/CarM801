@@ -1,13 +1,13 @@
-﻿@page "/" 
-@using System.Security.Claims; 
-@using Microsoft.AspNetCore.Identity; 
-@using Microsoft.AspNetCore.Components.Authorization; 
-@inject UserManager<IdentityUser> _UserManager 
-@inject RoleManager<IdentityRole> _RoleManager 
+﻿@page "/"
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Components.Authorization;
+@inject UserManager<IdentityUser> _UserManager
+@inject RoleManager<IdentityRole> _RoleManager
 
-@if (CurrentUser.IsInRole(ADMINISTRATION_ROLE)) 
-{ 
-    <p>You are an Administrator named: <b>@CurrentUser.Identity.Name</b></p> 
+@if (CurrentUser.IsInRole(ADMINISTRATION_ROLE))
+{
+    <p>You are an Administrator named: <b>@CurrentUser.Identity.Name</b></p>
 }
 
 <div class="card" style="width: 18rem;">
@@ -20,41 +20,39 @@
 </div>
 
 
-@code { 
+@code {
 
-    [CascadingParameter] 
-    private Task<AuthenticationState> authenticationStateTask { get; set; } 
-    ClaimsPrincipal CurrentUser = new ClaimsPrincipal(); 
-    string ADMINISTRATION_ROLE = "Administrators"; 
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+    ClaimsPrincipal CurrentUser = new ClaimsPrincipal();
+    string ADMINISTRATION_ROLE = "Administrators";
 
-    protected override async Task OnInitializedAsync() 
-    { 
-        // Ensure there is an ADMINISTRATION_ROLE 
-        var RoleResult = await _RoleManager.FindByNameAsync(ADMINISTRATION_ROLE); 
-        if (RoleResult == null) 
-        { 
-            // Create ADMINISTRATION_ROLE role. 
-            await _RoleManager.CreateAsync(new IdentityRole(ADMINISTRATION_ROLE)); 
+    protected override async Task OnInitializedAsync()
+    {
+        // Ensure there is an ADMINISTRATION_ROLE
+        var RoleResult = await _RoleManager.FindByNameAsync(ADMINISTRATION_ROLE);
+        if (RoleResult == null)
+        {
+            // Create ADMINISTRATION_ROLE role.
+            await _RoleManager.CreateAsync(new IdentityRole(ADMINISTRATION_ROLE));
         }
+    // Try to get the administrator account.
+        var user = await _UserManager.FindByNameAsync("Administrator@Email");
 
-        // Try to get the administrator account. 
-        var user = await _UserManager.FindByNameAsync("Administrator@Email"); 
-
-        // Administrator may not be created yet. 
-        if (user != null) 
-        { 
-            // Is administrator account in the administrator role? 
+        // Administrator may not be created yet.
+        if (user != null)
+        {
+            // Is administrator account in the administrator role?
             var UserResult = await _UserManager.IsInRoleAsync(user, ADMINISTRATION_ROLE);
 
-            if (!UserResult) 
-            { 
-                // Put admin in administrator role. 
-                await _UserManager.AddToRoleAsync(user, ADMINISTRATION_ROLE); 
-            } 
+            if (!UserResult)
+            {
+                // Put admin in administrator role.
+                await _UserManager.AddToRoleAsync(user, ADMINISTRATION_ROLE);
+            }
         }
-            
-        // Get the current user.      
-        // Note: User may not be logged in. 
+        // Get the current user.
+        // Note: User may not be logged in.
         CurrentUser = (await authenticationStateTask).User;
      }
-} 
+}
