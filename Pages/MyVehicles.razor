@@ -5,24 +5,29 @@
 
 <h3>My Vehicles</h3>
 <br/>
- <div>
     <div id="target" style="height: 500px;">
-        <SfGrid ID="Grid"
-                DataSource="@vehicles">
-    <GridPageSettings PageSize="5"></GridPageSettings>
-        <GridColumns>
-            <GridColumn Field=@nameof(Vehicles.Year) HeaderText="Year" TextAlign="@TextAlign.Left" Width="70">
-            </GridColumn>
-            <GridColumn Field=@nameof(Vehicles.Make) HeaderText="Make" TextAlign="@TextAlign.Left" Width="80">
-            </GridColumn>
-            <GridColumn Field=@nameof(Vehicles.Model) HeaderText="Model" TextAlign="@TextAlign.Left" Width="80">
-            </GridColumn>
-            <GridColumn Field=@nameof(Vehicles.Color) HeaderText="Color" TextAlign="@TextAlign.Left" Width="150">
-            </GridColumn>
-        </GridColumns>
-    </SfGrid>
+        <SfGrid ID="Grid" DataSource="@vehicles">
+        <GridPageSettings PageSize="5"></GridPageSettings>
+            <GridColumns>
+                <GridColumn IsPrimaryKey="true" Field=@nameof(Vehicles.Year) HeaderText="Year" TextAlign="@TextAlign.Left" Width="70">
+                </GridColumn>
+                <GridColumn Field=@nameof(Vehicles.Make) HeaderText="Make" TextAlign="@TextAlign.Left" Width="80">
+                </GridColumn>
+                <GridColumn Field=@nameof(Vehicles.Model) HeaderText="Model" TextAlign="@TextAlign.Left" Width="80">
+                </GridColumn>
+                <GridColumn Field=@nameof(Vehicles.VehicleType) HeaderText="Type" TextAlign="@TextAlign.Left" Width="80">
+                </GridColumn>
+                <GridColumn Field=@nameof(Vehicles.Color) HeaderText="Color" TextAlign="@TextAlign.Left" Width="80">
+                </GridColumn>
+                <GridColumn Field=@nameof(Vehicles.Engine) HeaderText="Engine" TextAlign="@TextAlign.Left" Width="60">
+                </GridColumn>
+                <GridColumn Field=@nameof(Vehicles.Mileage) HeaderText="Mileage" TextAlign="@TextAlign.Left" Width="60">
+                </GridColumn>
+                <GridColumn Field=@nameof(Vehicles.FuelCapacity) HeaderText="Fuel Capacity" TextAlign="@TextAlign.Left" Width="60">
+                </GridColumn>
+            </GridColumns>
+        </SfGrid>
     </div>
-</div>
 
 
 @code {
