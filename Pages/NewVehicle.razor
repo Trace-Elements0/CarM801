@@ -71,10 +71,9 @@
 	{
 			//Assigning vehicleID a random number
 			Vehicles newVehicles = new Vehicles();
-			Random r = new Random();
-			int iD = r.Next(10);
-			//Assigning the velaues stated in the form to the values of a new object
-			newVehicles.VehicleId = iD;
+	        Random r = new Random();
+			//Assigning the values stated in the form to the values of a new object
+	        newVehicles.VehicleId = r.Next(0, 100);
 			newVehicles.Year = globVehicle.Year;
 			newVehicles.Make = globVehicle.Make;
 			newVehicles.Model = globVehicle.Model;
